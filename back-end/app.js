@@ -10,7 +10,7 @@ const userRoutes = require('./routes/user');
 // utilisation du module 'dotenv' pour masquer les informations de connexion à la base de données
 require('dotenv').config();
 
-mongoose.connect(process.env.DataBaseAdmin,
+mongoose.connect(`mongodb+srv://${process.env.DBUser}:${process.env.DBPassword}@${process.env.DBHost}?retryWrites=true&w=majority`,
 {useNewUrlParser: true,
   useUnifiedTopology: true})
   .then(() => console.log('Connexion à MongoDB réussie !'))

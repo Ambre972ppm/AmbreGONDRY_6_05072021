@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
-    email: { type : String, required: [true, "Veuillez renseigner votre adresse email"], unique: true, match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, "Veuillez entrer une adresse email correcte"] },
+    email: { type : String, required: [true, "Veuillez renseigner votre adresse email"], unique: true, match: [/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, "Veuillez renseigner une adresse mail correcte"] },
     password: { type : String, required: [true, "Veuillez choisir votre mot de passe"] },
 });
 

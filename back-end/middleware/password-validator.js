@@ -1,4 +1,4 @@
-const passwordSchema = require('../models/password');
+const passwordSchema = require('../models/user');
 
 // vérifie que le mot de passe valide le schema décrit
 module.exports = (req, res, next) => {
