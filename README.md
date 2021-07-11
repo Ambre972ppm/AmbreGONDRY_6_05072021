@@ -11,9 +11,9 @@ Même si l’application deviendra peut-être un magasin en ligne dans un futur 
 
 **Technologies utilisées : 
 
-Framework : Express
-Serveur : NodeJS
-Base de données : MongoDB
+Framework : Express /
+Serveur : NodeJS /
+Base de données : MongoDB /
 Javascript
 
 utilisation du pack Mongoose avec des shemas de données
