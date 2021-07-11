@@ -1,4 +1,4 @@
-const passwordSchema = require('../models/user'); // on récupère le modèle de mot de passe 
+const passwordSchema = require('../models/password'); // on récupère le modèle de mot de passe 
 
 module.exports = (req, res, next) => {
     if (!passwordSchema.validate(req.body.password)) { // si le mot de passe de la demande ne correspond pas au schéma demandé
