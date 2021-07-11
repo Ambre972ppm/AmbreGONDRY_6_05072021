@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // récupération du package mongoose pour facilité les échanges avec la Base de données
 
 const sauceSchema = mongoose.Schema({
     userId: { type : String, required: true },

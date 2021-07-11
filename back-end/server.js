@@ -1,5 +1,5 @@
-const http = require('http');
-const app = require('./app');
+const http = require('http'); // import du package Http
+const app = require('./app'); // on récupère App pour utiliser l'application sur le serveur
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -12,10 +12,11 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');// Ajout du port de connection si celui-ci n'est pas configuré par l environnement
+// Si aucun port n'est fourni on écoutera sur le port 3000
 app.set('port', port);
 
-const errorHandler = error => {
+const errorHandler = error => {// recherche des diffèrentes erreurs pour les traiter de manière appropriées
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -35,7 +36,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app); // création du serveur qui utilise app
 
 server.on('error', errorHandler);
 server.on('listening', () => {
