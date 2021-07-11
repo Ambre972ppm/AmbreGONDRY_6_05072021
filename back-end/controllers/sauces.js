@@ -1,13 +1,13 @@
 const Sauce = require('../models/sauce');//récupération du modèle
-const fs = require('fs');//récupération de 'file system' qui permet la gestion des images
+const fs = require('fs');//récupération du package 'file system' qui permet de modifier le système de fichier et donc d'en supprimer
 
 exports.createSauce = (req, res, next) => {//création d'une nouvelle sauce
   const sauceObject = JSON.parse(req.body.sauce);//on récupère les données envoyés par le front et on le retourne en objet
   delete sauceObject._id;//on supprime l'id généré par défaut car un nouvel id est créé par la BDD
 
-  const sauce = new Sauce({//notre nouvelle sauce créé suis notre modèle
+  const sauce = new Sauce({
     ...sauceObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,//résolution de l'url de l'image
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,// création de l'url de l'image
     
   });
     sauce.save() // sauvegarde de la sauce dans la base de données
@@ -16,11 +16,11 @@ exports.createSauce = (req, res, next) => {//création d'une nouvelle sauce
 };
 
 exports.modifySauce = (req, res, next) => {// modification de la sauce sélectionnée
-    const sauceObject = req.file ?
+    const sauceObject = req.file ? // si on trouve le fichier on suit la même logique
     {
-      ...JSON.parse(req.body.sauce),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : {...req.body};
+      ...JSON.parse(req.body.sauce), // on récupère les infos de la sauce dans le corps de la requête
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` // on modifie l'url de l'image
+    } : {...req.body}; // sinon on récupère le corps de la requête
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
       .then(sauce => res.status(200).json({ message: 'Sauce modifiée !' }))
       .catch(error => res.status(404).json({ error }));
@@ -29,9 +29,9 @@ exports.modifySauce = (req, res, next) => {// modification de la sauce sélectio
 exports.deleteSauce = (req, res, next) => { // suppression de la sauce sélectionnée
     Sauce.findOne({_id: req.params.id})
     .then(sauce => {
-      const filename = sauce.imageUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        Sauce.deleteOne({ _id: req.params.id })
+      const filename = sauce.imageUrl.split('/images/')[1]; // on récupère le nom de l'image
+      fs.unlink(`images/${filename}`, () => { // pour la supprimer du dossier image
+        Sauce.deleteOne({ _id: req.params.id }) // on supprime la sauce selectionnée de la base de données
         .then(sauce => res.status(200).json({message : 'Sauce supprimé !'}))
         .catch(error => res.status(400).json({ error }));
       });
