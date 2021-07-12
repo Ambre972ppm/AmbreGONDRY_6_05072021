@@ -1,4 +1,4 @@
-const multer = require('multer'); // on récupère le package multer qui permet de gérer les fichier entrant dans les requêtes http
+const multer = require('multer'); // on récupère le package multer qui permet de gérer les fichiers entrant dans les requêtes http
 
 const MIME_TYPES = { // dictionnaire pour définir la bonne extension de fichier
     'image/jpg': 'jpg',

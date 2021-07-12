@@ -4,10 +4,13 @@ const fs = require('fs');//récupération du package 'file system' qui permet de
 exports.createSauce = (req, res, next) => {//création d'une nouvelle sauce
   const sauceObject = JSON.parse(req.body.sauce);//on récupère les données envoyés par le front et on le retourne en objet
   delete sauceObject._id;//on supprime l'id généré par défaut car un nouvel id est créé par la BDD
-
   const sauce = new Sauce({
     ...sauceObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,// création de l'url de l'image
+    usersLiked:[],
+    usersDisliked:[],
+    likes:0,
+    dislikes:0
     
   });
     sauce.save() // sauvegarde de la sauce dans la base de données
