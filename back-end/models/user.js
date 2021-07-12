@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.plugin(uniqueValidator);
-userSchema.plugin(sanitizerPlugin);
+userSchema.plugin(sanitizerPlugin); // Utilise le désinfectant HTML de Google Caja pour effectuer la désinfection
 
 module.exports = mongoose.model('User', userSchema);
 
